@@ -18,10 +18,11 @@ struct List
 
 // function prototypes
 void init(struct List *list_ptr);
+void menu();
 void prepend(struct List *list_ptr, int value);
 void append(struct List *list_ptr, int value);
 void print_list(struct List *list_ptr);
-void menu();
+struct Node *find_by_value(struct List *list_ptr, int value);
 
 int main()
 {
@@ -70,6 +71,17 @@ void init(struct List *list_ptr)
   list_ptr->head = NULL;
   list_ptr->tail = NULL;
   list_ptr->node_counter = 0;
+}
+
+// starting point
+void menu()
+{
+  printf("Singly Linked List Operations\n");
+  printf("-----------------------------\n");
+  printf("1) Add a new node at the beginning of the list\n");
+  printf("2) Add a new node at the end of the list\n");
+  printf("3) Print the list from the beginning to the end\n");
+  printf("0) Quit the program\n");
 }
 
 // add a new node at the beginning of the linked list
@@ -142,13 +154,19 @@ void print_list(struct List *list_ptr)
   printf("\n");
 }
 
-// starting point
-void menu()
+struct Node *find_by_value(struct List *list_ptr, int value)
 {
-  printf("Singly Linked List Operations\n");
-  printf("-----------------------------\n");
-  printf("1) Add a new node at the beginning of the list\n");
-  printf("2) Add a new node at the end of the list\n");
-  printf("3) Print the list from the beginning to the end\n");
-  printf("0) Quit the program\n");
+  struct Node *iter = list_ptr->head;
+
+  while (iter != NULL)
+  {
+    if (iter->data == value)
+    {
+      break;
+    }
+
+    iter = iter->next;
+  }
+
+  return iter;
 }
