@@ -20,6 +20,7 @@ void prepend(int val);
 void append(int val);
 void remove_node(int val);
 void display();
+void count();
 
 int main()
 {
@@ -34,9 +35,13 @@ int main()
 
   display();
 
+  count();
+
   remove_node(2); // doesn't work for head node
 
   display();
+
+  count();
 
   return 0;
 }
@@ -120,4 +125,20 @@ void display()
   }
 
   printf("\n");
+}
+
+// counts nodes in the list
+void count()
+{
+  int counter = 0;
+
+  node *iter = head;
+
+  while (iter != NULL)
+  {
+    counter++;
+    iter = iter->next;
+  }
+
+  printf("Length of the list: %d\n", counter);
 }
