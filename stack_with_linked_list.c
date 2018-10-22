@@ -107,7 +107,7 @@ void display(node *top)
   }
   else
   {
-    while (top != NULL)
+    while (!empty())
     {
       printf("|  %d  |\n", top->data);
       top = top->next;
