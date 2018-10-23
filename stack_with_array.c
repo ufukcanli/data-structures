@@ -90,6 +90,7 @@ void display(stack *stk)
   if (empty(stk))
   {
     printf("EMPTY!\n");
+    return;
   }
 
   for (int i = stk->top; i > -1; i--)
