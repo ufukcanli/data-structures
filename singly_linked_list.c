@@ -18,7 +18,8 @@ node *head;
 void init();
 void prepend(int val);
 void append(int val);
-void remove_node(int val);
+void remove_by_val(int val);
+void remove_by_pos(int pos);
 void insert(int pos, int val);
 void display();
 void count();
@@ -38,8 +39,10 @@ int main()
 
   count();
 
-  remove_node(2); // doesn't work for head node
+  remove_by_val(2);
+  display();
 
+  insert(2, 4);
   display();
 
   count();
@@ -89,7 +92,7 @@ void append(int val)
 }
 
 // removes node with a given value
-void remove_node(int val)
+void remove_by_val(int val)
 {
   node *temp = head;
 
@@ -109,7 +112,24 @@ void remove_node(int val)
   free(del);
 }
 
-// insert node at a specific position
+// removes node with a given position
+void remove_by_pos(int pos)
+{
+  node *iter = head;
+
+  for (int i = 1; i < pos - 1; i++)
+  {
+    iter = iter->next;
+  }
+
+  node *temp = iter->next;
+
+  iter->next = iter->next->next;
+
+  free(temp);
+}
+
+// inserts node at a specific position
 void insert(int pos, int val)
 {
   node *new = malloc(sizeof(node));
