@@ -122,13 +122,15 @@ void insert(int pos, int val)
     return;
   }
 
+  node *iter = head;
+
   for (int i = 1; i < pos - 1; i++)
   {
-    head = head->next;
+    iter = iter->next;
   }
 
-  new->next = head->next;
-  head->next = new;
+  new->next = iter->next;
+  iter->next = new;
 }
 
 // print the list to the console
