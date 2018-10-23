@@ -117,7 +117,7 @@ void remove_by_pos(int pos)
 {
   node *iter = head;
 
-  for (int i = 1; i < pos - 1; i++)
+  for (int i = 0; i < pos - 1; i++)
   {
     iter = iter->next;
   }
@@ -144,7 +144,7 @@ void insert(int pos, int val)
 
   node *iter = head;
 
-  for (int i = 1; i < pos - 1; i++)
+  for (int i = 0; i < pos - 1; i++)
   {
     iter = iter->next;
   }
