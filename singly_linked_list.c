@@ -119,6 +119,7 @@ void insert(int pos, int val)
   if (pos == 1)
   {
     prepend(val);
+    return;
   }
 
   for (int i = 1; i < pos - 1; i++)
