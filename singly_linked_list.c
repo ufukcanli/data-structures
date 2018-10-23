@@ -19,6 +19,7 @@ void init();
 void prepend(int val);
 void append(int val);
 void remove_node(int val);
+void insert(int pos, int val);
 void display();
 void count();
 
@@ -87,7 +88,7 @@ void append(int val)
   iter->next = new;
 }
 
-// remove a node with a given value
+// removes node with a given value
 void remove_node(int val)
 {
   node *temp = head;
@@ -106,6 +107,27 @@ void remove_node(int val)
   node *del = temp->next;
   temp->next = del->next;
   free(del);
+}
+
+// insert node at a specific position
+void insert(int pos, int val)
+{
+  node *new = malloc(sizeof(node));
+
+  new->data = val;
+
+  if (pos == 1)
+  {
+    prepend(val);
+  }
+
+  for (int i = 1; i < pos - 1; i++)
+  {
+    head = head->next;
+  }
+
+  new->next = head->next;
+  head->next = new;
 }
 
 // print the list to the console
