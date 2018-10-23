@@ -3,68 +3,97 @@
 #define SIZE 10
 
 // structure of stack
-typedef struct
+struct Stack
 {
-  int items[SIZE];
+  int array[SIZE];
   int top;
-} Stack;
+};
+
+typedef struct Stack stack;
 
 // function prototypes
-void init(Stack *stack_ptr);
-void push(Stack *stack_ptr, int value);
-int pop(Stack *stack_ptr);
+void init(stack *stk);
+void push(stack *stk, int val);
+int pop(stack *stk);
+int empty(stack *stk);
+int full(stack *stk);
+void display(stack *stk);
 
 int main()
 {
-  Stack stack1, stack2; // create stack instances
+  stack stack1;
 
-  init(&stack1); // initialize its top value as -1
-  init(&stack2);
+  init(&stack1);
+
+  display(&stack1);
 
   push(&stack1, 100);
   push(&stack1, 200);
   push(&stack1, 300);
+  push(&stack1, 400);
 
-  push(&stack2, 5);
-  push(&stack2, 10);
-  push(&stack2, 15);
+  display(&stack1);
 
   printf("Deleted from stack1: %d\n", pop(&stack1));
-  printf("Deleted from stack2: %d\n", pop(&stack2));
+
+  display(&stack1);
 
   return 0;
 }
 
 // initialization
-void init(Stack *stack_ptr)
+void init(stack *stk)
 {
-  stack_ptr->top = -1;
+  stk->top = -1;
 }
 
 // add an element to the stack
-void push(Stack *stack_ptr, int value)
+void push(stack *stk, int val)
 {
-  if (stack_ptr->top == SIZE - 1)
+  if (full(stk))
   {
     printf("Stack overflow!\n");
     return;
   }
 
-  stack_ptr->top++;
-  stack_ptr->items[stack_ptr->top] = value;
+  stk->top++;
+  stk->array[stk->top] = val;
 }
 
 // remove an element from the stack
-int pop(Stack *stack_ptr)
+int pop(stack *stk)
 {
-  if (stack_ptr->top == -1)
+  if (empty(stk))
   {
     printf("Stack underflow!\n");
     return -9999;
   }
 
-  int value = stack_ptr->items[stack_ptr->top];
-  stack_ptr->top--;
+  int del = stk->array[stk->top];
+  stk->top--;
 
-  return value;
+  return del;
+}
+
+int empty(stack *stk)
+{
+  return stk->top == -1;
+}
+
+int full(stack *stk)
+{
+  return stk->top == SIZE - 1;
+}
+
+void display(stack *stk)
+{
+  if (empty(stk))
+  {
+    printf("EMPTY!\n");
+  }
+
+  for (int i = stk->top; i > -1; i--)
+  {
+    printf("| %d |\n", stk->array[i]);
+  }
 }
