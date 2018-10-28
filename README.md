@@ -1,2 +1,2 @@
 # data-structures
-Data Structures in C Language
+Basic data structures operations in C programming language.
