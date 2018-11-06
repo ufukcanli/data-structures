@@ -81,6 +81,8 @@ int pop(stack *stk)
     if (stk->top == -1)
     {
         printf("STACK UNDERFLOW!\n");
+        
+        return -9999;
     }
 
     int del = stk->items[stk->top];
