@@ -91,6 +91,8 @@ int pop(stack *stk)
     stk->top = stk->top->next;
 
     free(del);
+    
+    stk->length--;
 
     return value;
 }
