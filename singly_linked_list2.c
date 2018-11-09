@@ -11,6 +11,7 @@ typedef struct Node node;
 
 node *prepend(node *head, int val);
 node *append(node *head, int val);
+node *insert(node *head, int pos, int val);
 node *remove_by_val(node *head, int val);
 node *destroy_list(node *head);
 void list_info(node *head);
@@ -83,6 +84,33 @@ node *append(node *head, int val)
         iter = iter->next;
     }
 
+    iter->next = new;
+
+    return head;
+}
+
+
+node *insert(node *head, int pos, int val)
+{
+    node *new = malloc(sizeof(node));
+
+    new->data = val;
+
+    if (pos == 0)
+    {
+        head = prepend(head, val);
+
+        return head;
+    }
+
+    node *iter = head;
+
+    for (int i = 0; i < pos - 1; i++)
+    {
+        iter = iter->next;
+    }
+
+    new->next = iter->next;
     iter->next = new;
 
     return head;
