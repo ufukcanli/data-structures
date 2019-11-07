@@ -153,3 +153,18 @@ int size(btree *root)
 
     return size(root->left) + 1 + size(root->right);
 }
+
+// find the height of the tree
+int height(btree *root)
+{
+    if (root == NULL)
+        return -1;
+
+    int left_height = height(root->left);
+    int right_height = height(root->right);
+
+    if (left_height > right_height)
+        return left_height + 1;
+    else
+        return right_height + 1;
+}
