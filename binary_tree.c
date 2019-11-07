@@ -17,6 +17,7 @@ void preorder(btree *root);
 void inorder(btree *root);
 void postorder(btree *root);
 void mirror(btree *root);
+int size(btree *root);
 
 int main()
 {
@@ -142,4 +143,13 @@ void mirror(btree *root)
         root->left = root->right;
         root->right = temp_node;
     }
+}
+
+// find the size of the tree
+int size(btree *root)
+{
+    if (root == NULL)
+        return 0;
+
+    return size(root->left) + 1 + size(root->right);
 }
