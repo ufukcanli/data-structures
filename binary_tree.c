@@ -168,3 +168,17 @@ int height(btree *root)
     else
         return right_height + 1;
 }
+
+// find a specific node
+btree *search(btree *root, int value)
+{
+    if (root == NULL)
+        return NULL;
+
+    if (root->data == value)
+        return root;
+    else if (root->data > value)
+        return search(root->left, value);
+    else
+        return search(root->right, value);
+}
