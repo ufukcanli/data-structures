@@ -15,20 +15,24 @@ node *insert_node(node *root, int value);
 void preorder(node *root);
 void inorder(node *root);
 void postorder(node *root);
-node *find_smallest(node *root);
-node *find_largest(node *root);
+int find_smallest(node *root);
+int find_largest(node *root);
 int size(node *root);
 int height(node *root);
 node *search(node *root, int value);
 node *mirror(node *root);
 node *destroy(node *root);
+int is_bst(node *root);
 
 void main()
 {
     node *root = NULL;
 
     root = insert_node(root, 5);
-    root = insert_node(root, 75);
+    root = insert_node(root, 6);
+    root = insert_node(root, 7);
+
+    postorder(root);
 }
 
 node *create_node(int value)
@@ -85,20 +89,26 @@ void postorder(node *root)
     }
 }
 
-node *find_smallest(node *root)
+int find_smallest(node *root)
 {
-    if (root == NULL || root->left == NULL)
-        return root;
+    if (root == NULL)
+        return 0;
 
-    return find_smallest(root->left);
+    while (root->left != NULL)
+        root = root->left;
+
+    return root->data;
 }
 
-node *find_largest(node *root)
+int find_largest(node *root)
 {
-    if (root == NULL || root->right == NULL)
-        return root;
+    if (root == NULL)
+        return 0;
 
-    return find_largest(root->right);
+    while (root->right != NULL)
+        root = root->right;
+
+    return root->data;
 }
 
 int size(node *root)
@@ -130,11 +140,12 @@ node *search(node *root, int value)
 
     if (root->data == value)
         return root;
-
-    if (root->data > value)
+    else if (root->data > value)
         return search(root->left, value);
+    else
+        return search(root->right, value);
 
-    return search(root->right, value);
+    return NULL;
 }
 
 node *mirror(node *root)
@@ -160,4 +171,21 @@ node *destroy(node *root)
         destroy(root->right);
         free(root);
     }
+}
+
+int is_bst(node *root)
+{
+    if (root == NULL)
+        return 1;
+
+    if (root->left != NULL && find_largest(root->left) > root->data)
+        return 0;
+
+    if (root->right != NULL && find_smallest(root->right) <= root->data)
+        return 0;
+
+    if (!is_bst(root->left) || !is_bst(root->right))
+        return 0;
+
+    return 1;
 }
